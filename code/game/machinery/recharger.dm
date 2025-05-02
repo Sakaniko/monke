@@ -16,6 +16,7 @@
 		/obj/item/gun/energy,
 		/obj/item/gun/microfusion, //monkestation edit
 		/obj/item/melee/baton/security,
+		/obj/item/melee/baton/dual, //monkestation edit
 		/obj/item/ammo_box/magazine/recharge,
 		/obj/item/modular_computer,
 		/obj/item/stock_parts/cell/microfusion, //monkestation edit

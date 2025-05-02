@@ -647,6 +647,250 @@
 /obj/item/melee/baton/security/loaded //this one starts with a cell pre-installed.
 	preload_cell_type = /obj/item/stock_parts/cell/high
 
+//Monkestation addition start
+/obj/item/melee/baton/dual
+	name = "dual stun baton"
+	desc = "An experimental stun baton, inspired by corporate rivals. Used for incapacitating people with while looking cool. Comes with minor block chance."
+	desc_controls ="Left click to stun, right click to harm."
+	icon = 'icons/obj/weapons/baton.dmi'
+	icon_state = "dual_stunbaton"
+	inhand_icon_state = "dual_baton"
+	lefthand_file = 'icons/mob/inhands/equipment/security_lefthand.dmi'
+	righthand_file = 'icons/mob/inhands/equipment/security_righthand.dmi'
+	worn_icon_state = "dual_baton"
+	force = 5 //Wield the damn thing
+	wound_bonus = 0
+	attack_verb_continuous = list("beats", "whacks")
+	attack_verb_simple = list("beat", "whack")
+	block_chance = 15
+	block_sound = 'sound/weapons/block_blade.ogg'
+	armor_type = /datum/armor/dual_baton
+	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | ACID_PROOF //It can be a theft objective
+	throwforce = 10
+	force_say_chance = 50
+	stamina_damage = 50 //MUCH weaker since its a little more unwieldy
+	knockdown_time = 6 SECONDS
+	clumsy_knockdown_time = 18 SECONDS
+	cooldown = 0.25 SECOND //Attacks MUCH faster than regular baton because 2 SIDES
+	on_stun_sound = 'sound/weapons/egloves.ogg'
+	on_stun_volume = 50
+	active = FALSE
+	context_living_rmb_active = "Harmful Stun"
+	var/throw_stun_chance = 50
+	var/obj/item/stock_parts/cell/cell
+	var/preload_cell_type //if not empty the baton starts with this type of cell
+	var/cell_hit_cost = 1000
+	var/can_remove_cell = TRUE
+
+/obj/item/melee/baton/dual/Initialize(mapload)
+	. = ..()
+	if(preload_cell_type)
+		if(!ispath(preload_cell_type, /obj/item/stock_parts/cell))
+			log_mapping("[src] at [AREACOORD(src)] had an invalid preload_cell_type: [preload_cell_type].")
+		else
+			cell = new preload_cell_type(src)
+	update_appearance()
+	AddComponent(/datum/component/two_handed, \
+	force_wielded = 15, \
+	wield_callback = CALLBACK(src, PROC_REF(on_wield)), \
+	unwield_callback = CALLBACK(src, PROC_REF(on_unwield)), \
+	require_twohands = TRUE, \
+	)
+
+/obj/item/melee/baton/dual/proc/on_wield(atom/source, mob/living/user)
+	hitsound = "swing_hit"
+
+/obj/item/melee/baton/dual/proc/on_unwield(atom/source, mob/living/user)
+	hitsound = initial(hitsound)
+
+/datum/armor/dual_baton
+	bomb = 50
+	fire = 100
+	acid = 100
+
+/obj/item/melee/baton/dual/get_cell()
+	return cell
+
+/obj/item/melee/baton/dual/suicide_act(mob/living/user)
+	if(cell?.charge && active)
+		user.visible_message(span_suicide("[user] is putting the live [name] in [user.p_their()] mouth! It looks like [user.p_theyre()] trying to commit suicide!"))
+		attack(user, user)
+		return FIRELOSS
+	else
+		user.visible_message(span_suicide("[user] is shoving the [name] down their throat! It looks like [user.p_theyre()] trying to commit suicide!"))
+		return OXYLOSS
+
+/obj/item/melee/baton/dual/Exited(atom/movable/mov_content)
+	. = ..()
+	if(mov_content == cell)
+		cell.update_appearance()
+		cell = null
+		active = FALSE
+		update_appearance()
+
+/obj/item/melee/baton/dual/update_icon_state()
+	if(active)
+		icon_state = "[initial(icon_state)]_active"
+		return ..()
+	if(!cell)
+		icon_state = "[initial(icon_state)]_nocell"
+		return ..()
+	icon_state = "[initial(icon_state)]"
+	return ..()
+
+/obj/item/melee/baton/dual/examine(mob/user)
+	. = ..()
+	if(cell)
+		. += span_notice("\The [src] is [round(cell.percent())]% charged.")
+	else
+		. += span_warning("\The [src] does not have a power source installed.")
+
+/obj/item/melee/baton/dual/screwdriver_act(mob/living/user, obj/item/tool)
+	if(tryremovecell(user))
+		tool.play_tool_sound(src)
+	return TRUE
+
+/obj/item/melee/baton/dual/attackby(obj/item/item, mob/user, params)
+	if(istype(item, /obj/item/stock_parts/cell))
+		var/obj/item/stock_parts/cell/active_cell = item
+		if(cell)
+			to_chat(user, span_warning("[src] already has a cell!"))
+		else
+			if(active_cell.maxcharge < cell_hit_cost)
+				to_chat(user, span_notice("[src] requires a higher capacity cell."))
+				return
+			if(!user.transferItemToLoc(item, src))
+				return
+			cell = item
+			to_chat(user, span_notice("You install a cell in [src]."))
+			update_appearance()
+	else
+		return ..()
+
+/obj/item/melee/baton/dual/proc/tryremovecell(mob/user)
+	if(cell && can_remove_cell)
+		cell.forceMove(drop_location())
+		to_chat(user, span_notice("You remove the cell from [src]."))
+		return TRUE
+	return FALSE
+
+/obj/item/melee/baton/dual/attack_self(mob/user)
+	if(cell?.charge >= cell_hit_cost)
+		active = !active
+		balloon_alert(user, "turned [active ? "on" : "off"]")
+		playsound(src, SFX_SPARKS, 75, TRUE, -1)
+	else
+		active = FALSE
+		if(!cell)
+			balloon_alert(user, "no power source!")
+		else
+			balloon_alert(user, "out of charge!")
+	update_appearance()
+	add_fingerprint(user)
+
+/obj/item/melee/baton/dual/proc/deductcharge(deducted_charge)
+	if(!cell)
+		return
+	//Note this value returned is significant, as it will determine
+	//if a stun is applied or not
+	. = cell.use(deducted_charge)
+	if(active && cell.charge < cell_hit_cost)
+		//we're below minimum, turn off
+		active = FALSE
+		update_appearance()
+		playsound(src, SFX_SPARKS, 75, TRUE, -1)
+
+/obj/item/melee/baton/dual/clumsy_check(mob/living/carbon/human/user)
+	. = ..()
+	if(.)
+		SEND_SIGNAL(user, COMSIG_LIVING_MINOR_SHOCK)
+		deductcharge(cell_hit_cost)
+
+/// Handles prodding targets with turned off stunbatons and right clicking stun'n'bash
+/obj/item/melee/baton/dual/baton_attack(mob/living/target, mob/living/carbon/human/user, modifiers)
+	. = ..()
+	if(. != BATON_DO_NORMAL_ATTACK)
+		return
+	if((user.istate & ISTATE_SECONDARY))
+		if(active && cooldown_check <= world.time && !check_parried(target, user))
+			finalize_baton_attack(target, user, modifiers, in_attack_chain = FALSE)
+	else if(!(user.istate & ISTATE_HARM))
+		target.visible_message(span_warning("[user] prods [target] with [src]. Luckily it was off."), \
+			span_warning("[user] prods you with [src]. Luckily it was off."))
+		return BATON_ATTACK_DONE
+	if(prob(75))
+	INVOKE_ASYNC(src, PROC_REF(dual_spin), user)
+
+/obj/item/melee/baton/dual/proc/dual_spin(mob/living/user)
+	dance_rotate(user, CALLBACK(user, TYPE_PROC_REF(/mob, dance_flip)))
+
+/obj/item/melee/baton/dual/baton_effect(mob/living/target, mob/living/user, modifiers, stun_override)
+	if(iscyborg(loc))
+		var/mob/living/silicon/robot/robot = loc
+		if(!robot || !robot.cell || !robot.cell.use(cell_hit_cost))
+			return FALSE
+	else if(!deductcharge(cell_hit_cost))
+		return FALSE
+	stun_override = 0 //Avoids knocking people down prematurely.
+	return ..()
+
+/*
+ * After a target is hit, we apply some status effects.
+ * After a period of time, we then check to see what stun duration we give.
+ */
+/obj/item/melee/baton/dual/additional_effects_non_cyborg(mob/living/target, mob/living/user)
+	target.Disorient(6 SECONDS, 5, paralyze = 10 SECONDS, stack_status = FALSE)
+
+	SEND_SIGNAL(target, COMSIG_LIVING_MINOR_SHOCK)
+
+	if(prob(75))
+	INVOKE_ASYNC(src, PROC_REF(dual_spin), user)
+
+/obj/item/melee/baton/dual/get_wait_description()
+	return span_danger("The baton is still charging!")
+
+/obj/item/melee/baton/dual/get_stun_description(mob/living/target, mob/living/user)
+	. = list()
+
+	.["visible"] = span_danger("[user] stuns [target] with [src]!")
+	.["local"] = span_userdanger("[user] stuns you with [src]!")
+
+/obj/item/melee/baton/dual/get_unga_dunga_cyborg_stun_description(mob/living/target, mob/living/user)
+	. = list()
+
+	.["visible"] = span_danger("[user] tries to stun [target] with [src], and predictably fails!")
+	.["local"] = span_userdanger("[target] tries to... stun you with [src]?")
+
+/obj/item/melee/baton/dual/throw_impact(atom/hit_atom, datum/thrownthing/throwingdatum)
+	. = ..()
+	if(active && prob(throw_stun_chance) && isliving(hit_atom))
+		finalize_baton_attack(hit_atom, thrownby?.resolve(), in_attack_chain = FALSE)
+
+/obj/item/melee/baton/dual/emp_act(severity)
+	. = ..()
+	if (!cell)
+		return
+	if (!(. & EMP_PROTECT_SELF))
+		deductcharge(1000 / severity)
+	if (cell.charge >= cell_hit_cost)
+		var/scramble_time
+		scramble_mode()
+		for(var/loops in 1 to rand(6, 12))
+			scramble_time = rand(5, 15) / (1 SECONDS)
+			addtimer(CALLBACK(src, PROC_REF(scramble_mode)), scramble_time*loops * (1 SECONDS))
+
+/obj/item/melee/baton/dual/proc/scramble_mode()
+	if (!cell || cell.charge < cell_hit_cost)
+		return
+	active = !active
+	playsound(src, SFX_SPARKS, 75, TRUE, -1)
+	update_appearance()
+
+/obj/item/melee/baton/dual/loaded //this one starts with a cell pre-installed.
+	preload_cell_type = /obj/item/stock_parts/cell/bluespace
+
+//Monkestation addition end
+
 //Makeshift stun baton. Replacement for stun gloves.
 /obj/item/melee/baton/security/cattleprod
 	name = "stunprod"
