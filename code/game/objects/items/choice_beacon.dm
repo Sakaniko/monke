@@ -178,12 +178,54 @@
 	return ..()
 
 //Monkestation edit start
+
+//Gun Beacons
+// HoS weapon beacon
+/obj/item/choice_beacon/hos_gun
+	name = "head of security's gun beacon"
+	desc = "A single use beacon to deliver a gunset of your choice to help with security detail."
+	company_source = "Central Command"
+	company_message = span_bold("Supply Pod incoming, please stand back.")
+
+/obj/item/choice_beacon/hos_gun/generate_display_names()
+	var/static/list/selectable_guns = list(
+		"X-01 MultiPhase Energy Gun" = /obj/item/gun/energy/e_gun/hos,
+		"Lawbringer" = /obj/item/gun/energy/e_gun/lawbringer,
+		"Compact Combat Shotgun" = /obj/item/gun/ballistic/shotgun/automatic/combat/compact,
+	)
+	return selectable_guns
+
+// Steal Objective, not just for Lawbringer but all their guns
+/datum/objective_item/steal/hosgun
+	name = "the head of security's personal weapon"
+	targetitem = /obj/item/choice_beacon/hos_gun
+	excludefromjob = list(JOB_HEAD_OF_SECURITY)
+	altitems = list(/obj/item/gun/ballistic/shotgun/automatic/combat/compact, /obj/item/gun/energy/e_gun/lawbringer, /obj/item/gun/energy/e_gun/hos)
+	item_owner = list(JOB_HEAD_OF_SECURITY)
+	exists_on_map = TRUE
+
+/obj/item/choice_beacon/hos_gun/add_stealing_item_objective()
+	return add_item_to_steal(src, /obj/item/choice_beacon/hos_gun)
+
 //Command equipment choice beacons
-//HoS equipment beacon
+//These sections all handle what are choices available in the beacons as well as creating the steal objectives for items that come from them
+//Captain
+/obj/item/choice_beacon/captain_equipment
+	name = "captain's equipment beacon"
+	desc = "A single use beacon to choose one of several NT items approved for use only by the Captain."
+	company_source = "Central Command"
+	company_message = span_bold("Equipment Delivery Pod incoming, please stand back.")
+
+/obj/item/choice_beacon/captain_equipment/generate_display_names()
+	var/static/list/selectable_equipment = list (
+
+	)
+	return selectable_equipment
+//HoS
 /obj/item/choice_beacon/hos_equipment
 	name = "head of security's equipment beacon"
-	desc = "A single use beacon to choose one of serveral prototype security items ready to be field tested."
-	company_source = "Central Command"
+	desc = "A single use beacon to choose one of several prototype security items ready to be field tested by the Head of Security."
+	company_source = "NanoTrasen Security Division"
 	company_message = span_bold("Prototype Delivery Pod incoming, please stand back.")
 
 /obj/item/choice_beacon/hos_equipment/generate_display_names()
@@ -192,3 +234,64 @@
 	)
 	return selectable_equipment
 
+// Steal Objective for HoS' equipment
+/datum/objective_item/steal/hosequipment
+	name = "the head of security's prototype equipment"
+	targetitem = /obj/item/choice_beacon/hos_equipment
+	excludefromjob = list(JOB_HEAD_OF_SECURITY)
+	altitems = list(/obj/item/melee/baton/dual, /obj/item/melee/baton/dual/loaded)
+	item_owner = list(JOB_HEAD_OF_SECURITY)
+	exists_on_map = TRUE
+
+/obj/item/choice_beacon/hos_equipment/add_stealing_item_objective()
+	return add_item_to_steal(src, /obj/item/choice_beacon/hos_equipment)
+
+//HoP
+/obj/item/choice_beacon/hop_equipment
+	name = "head of personnell's equipment beacon"
+	desc = "A single use beacon to choose one of several lower-end experimental items deemed fit for use by the Head of Personnell only."
+	company_source = "NanoTrasen Human Resources Division"
+	company_message = span_bold("Experimental Delivery Pod incoming, please stand back.")
+
+/obj/item/choice_beacon/hop_equipment/generate_display_names()
+	var/static/list/selectable_equipment = list (
+
+	)
+	return selectable_equipment
+//CMO
+/obj/item/choice_beacon/cmo_equipment
+	name = "chief medical officer's equipment beacon"
+	desc = "A single use beacon to choose one of several highly valuable pieces of medical equipment, only approved for Chief Medical Officer use."
+	company_source = "NanoTrasen Medical Division"
+	company_message = span_bold("Medical Prototype Delivery Pod incoming, please stand back.")
+
+/obj/item/choice_beacon/cmo_equipment/generate_display_names()
+	var/static/list/selectable_equipment = list (
+		"Hypospray" = /obj/item/reagent_containers/hypospray/cmo
+	)
+	return selectable_equipment
+//RD
+/obj/item/choice_beacon/rd_equipment
+	name = "research director's equipment beacon"
+	desc = "A single use beacon to choose one of several incredibly high-tech items that only the Research Director has been entrusted to test."
+	company_source = "NanoTrasen Research Division"
+	company_message = span_bold("Research Prototype Delivery Pod incoming, please stand back.")
+
+/obj/item/choice_beacon/rd_equipment/generate_display_names()
+	var/static/list/selectable_equipment = list (
+
+	)
+	return selectable_equipment
+//CE
+/obj/item/choice_beacon/ce_equipment
+	name = "chief engineer's equipment beacon"
+	desc = "A single use beacon to choose one of several pieces of advanced engineering equipment that only the Chief Engineer has been given permission to use."
+	company_source = "NanoTrasen Engineering Division"
+	company_message = span_bold("Advanced Equipment Delivery Pod incoming, please stand back.")
+
+/obj/item/choice_beacon/ce_equipment/generate_display_names()
+	var/static/list/selectable_equipment = list (
+
+	)
+	return selectable_equipment
+//Monkestation edit end

@@ -23,6 +23,7 @@
 	. = ..()
 
 	// Traitor steal objective
+	new /obj/item/choice_beacon/ce_equipment(src)//monkestation edit
 	new /obj/item/areaeditor/blueprints(src)
 	new /obj/item/gun/ballistic/SRN_rocketlauncher(src)
 	new /obj/item/pipe_dispenser(src)

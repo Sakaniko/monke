@@ -21,7 +21,8 @@
 	. = ..()
 
 	// Traitor steal objectives
-	new /obj/item/clothing/suit/armor/reactive/teleport(src)
+	//new /obj/item/clothing/suit/armor/reactive/teleport(src)//Monkestation edit: Being moved to the beacon below - Niko
+	new /obj/item/choice_beacon/rd_equipment(src)
 	new /obj/item/laser_pointer(src)
 
 /obj/structure/closet/secure_closet/cytology

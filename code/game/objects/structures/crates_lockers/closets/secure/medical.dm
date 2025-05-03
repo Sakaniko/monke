@@ -95,7 +95,8 @@
 	. = ..()
 
 	// Traitor steal objective
-	new /obj/item/reagent_containers/hypospray/cmo(src)
+	// new /obj/item/reagent_containers/hypospray/cmo(src) //Monkestation edit: Hypospray is being moved to the equipment beacon below!! -Niko 03/05/25 <3
+	new /obj/item/choice_beacon/cmo_equipment(src) // Monkestation edit
 
 /obj/structure/closet/secure_closet/animal
 	name = "animal control locker"
