@@ -74,6 +74,7 @@
 
 	// Traitor steal objectives
 	new /obj/item/choice_beacon/hos(src) //monkestation edit
+	new /obj/item/choice_beacon/hos_equipment(src) //monkestation edit: command equip beacons
 	new /obj/item/pinpointer/nuke(src)
 
 /obj/structure/closet/secure_closet/warden

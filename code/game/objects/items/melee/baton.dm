@@ -650,7 +650,7 @@
 //Monkestation addition start
 /obj/item/melee/baton/dual
 	name = "dual stun baton"
-	desc = "An experimental stun baton, inspired by corporate rivals. Used for incapacitating people with while looking cool. Comes with minor block chance."
+	desc = "An experimental stun baton inspired by a certain corporate rival's weapon. Equivalent to a regular baton when stunning but much more effective for lethal incapcitations than one."
 	desc_controls ="Left click to stun, right click to harm."
 	icon = 'icons/obj/weapons/baton.dmi'
 	icon_state = "dual_stunbaton"
@@ -660,20 +660,20 @@
 	worn_icon_state = "dual_baton"
 	force = 5 //Wield the damn thing
 	wound_bonus = 0
-	w_class = WEIGHT_CLASS_HUGE
-	slot_flags = ITEM_SLOT_BACK
-	attack_verb_continuous = list("beats", "whacks", "thwacks", "smacks", "crushes", "cracks")
-	attack_verb_simple = list("beat", "whack", "thwack", "smack", "crush", "crack")
-	block_chance = 15
+	w_class = WEIGHT_CLASS_HUGE //Very Big
+	slot_flags = ITEM_SLOT_BACK //Looks cool on your back though
+	attack_verb_continuous = list("beats")
+	attack_verb_simple = list("beat")
+	block_chance = 20
 	block_sound = 'sound/weapons/block_blade.ogg'
 	armor_type = /datum/armor/dual_baton
 	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | ACID_PROOF //It can be a theft objective
 	throwforce = 10
 	force_say_chance = 50
-	stamina_damage = 50 //MUCH weaker since its a little more unwieldy
+	stamina_damage = 50 //does half the stam damage...
 	knockdown_time = 6 SECONDS
 	clumsy_knockdown_time = 18 SECONDS
-	cooldown = 0.25 SECOND //Attacks MUCH faster than regular baton because 2 SIDES
+	cooldown = 0.75 SECOND //...but attacks twice as fast
 	on_stun_sound = 'sound/weapons/egloves.ogg'
 	on_stun_volume = 50
 	active = FALSE
@@ -816,12 +816,13 @@
 	if((user.istate & ISTATE_SECONDARY))
 		if(active && cooldown_check <= world.time && !check_parried(target, user))
 			finalize_baton_attack(target, user, modifiers, in_attack_chain = FALSE)
+	if(prob(50))
+		INVOKE_ASYNC(src, PROC_REF(dual_spin), user)
 	else if(!(user.istate & ISTATE_HARM))
 		target.visible_message(span_warning("[user] prods [target] with [src]. Luckily it was off."), \
 			span_warning("[user] prods you with [src]. Luckily it was off."))
 		return BATON_ATTACK_DONE
-	if(prob(75))
-	INVOKE_ASYNC(src, PROC_REF(dual_spin), user)
+
 
 /obj/item/melee/baton/dual/proc/dual_spin(mob/living/user)
 	dance_rotate(user, CALLBACK(user, TYPE_PROC_REF(/mob, dance_flip)))
@@ -843,9 +844,11 @@
 /obj/item/melee/baton/dual/additional_effects_non_cyborg(mob/living/target, mob/living/user)
 	target.Disorient(6 SECONDS, 5, paralyze = 10 SECONDS, stack_status = FALSE)
 
+	if(prob(75))
+		INVOKE_ASYNC(src, PROC_REF(dual_spin), user)
+
 	SEND_SIGNAL(target, COMSIG_LIVING_MINOR_SHOCK)
 
-	if(prob(75))
 	INVOKE_ASYNC(src, PROC_REF(dual_spin), user)
 
 /obj/item/melee/baton/dual/get_wait_description()
@@ -889,7 +892,7 @@
 	update_appearance()
 
 /obj/item/melee/baton/dual/loaded //this one starts with a cell pre-installed.
-	preload_cell_type = /obj/item/stock_parts/cell/bluespace
+	preload_cell_type = /obj/item/stock_parts/cell/super //Has twice the starting capacity of a regular baton
 
 //Monkestation addition end
 

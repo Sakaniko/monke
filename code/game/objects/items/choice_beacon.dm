@@ -68,6 +68,7 @@
 		"spawn" = choice_path,
 	))
 
+
 /obj/item/choice_beacon/ingredient
 	name = "ingredient delivery beacon"
 	desc = "Summon a box of ingredients to help you get started cooking."
@@ -176,4 +177,18 @@
 	GLOB.holy_armor_type = choice_path
 	return ..()
 
+//Monkestation edit start
+//Command equipment choice beacons
+//HoS equipment beacon
+/obj/item/choice_beacon/hos_equipment
+	name = "head of security's equipment beacon"
+	desc = "A single use beacon to choose one of serveral prototype security items ready to be field tested."
+	company_source = "Central Command"
+	company_message = span_bold("Prototype Delivery Pod incoming, please stand back.")
+
+/obj/item/choice_beacon/hos_equipment/generate_display_names()
+	var/static/list/selectable_equipment = list (
+		"Dual Stun Baton" = /obj/item/melee/baton/dual/loaded,
+	)
+	return selectable_equipment
 
