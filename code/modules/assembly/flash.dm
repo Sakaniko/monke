@@ -397,6 +397,7 @@
 	light_color = COLOR_RED_LIGHT
 	icon_state = "experiflash"
 	inhand_icon_state = "flashtool" //"experiflashtool"
+	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | ACID_PROOF //It can be a theft objective
 	cooldown = 25 //Very long cooldown but never burnsout
 	burnout_resistance = 99999 //Definitely a hackjob but i cannot figure it out right now.
 
