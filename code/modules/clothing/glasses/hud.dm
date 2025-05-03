@@ -207,6 +207,19 @@
 	color_cutoffs = list(35, 5, 5)
 	glass_colour_type = /datum/client_colour/glass_colour/green
 
+//monkestation addition start
+/obj/item/clothing/glasses/hud/security/lightamp
+	name = "light amplification goggles"
+	desc = "Prototype goggles that brightens your vision, making it possible to see perfectly in all envrionments, while using an on-board AI to prevent over-exposure. Weak to sudden bursts of light such as flashes. Comes with an integrated security HUD."
+	icon_state = "nvgmeson"//"amp_glasses"
+	inhand_icon_state = "nvgmeson"//"amp_glasses"
+	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | ACID_PROOF //theft objective
+	flags_cover = GLASSESCOVERSEYES
+	flash_protect = FLASH_PROTECTION_SENSITIVE //Sudden bright lights mess you up
+	lighting_cutoff = LIGHTING_CUTOFF_FULLBRIGHT //Fullbright vision
+	glass_colour_type = /datum/client_colour/glass_colour/red
+//monkestation addition end
+
 /obj/item/clothing/glasses/hud/security/sunglasses/gars
 	name = "\improper HUD gar glasses"
 	desc = "GAR glasses with a HUD."

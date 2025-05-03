@@ -367,7 +367,7 @@
 	name = "the head of security's prototype equipment"
 	targetitem = /obj/item/choice_beacon/hos_equipment
 	excludefromjob = list(JOB_HEAD_OF_SECURITY)
-	altitems = list(/obj/item/melee/baton/dual, /obj/item/melee/baton/dual/loaded)
+	altitems = list(/obj/item/melee/baton/dual, /obj/item/melee/baton/dual/loaded, /obj/item/clothing/glasses/hud/security/lightamp)
 	item_owner = list(JOB_HEAD_OF_SECURITY)
 	exists_on_map = TRUE
 

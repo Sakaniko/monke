@@ -219,6 +219,7 @@
 /obj/item/choice_beacon/hos_equipment/generate_display_names()
 	var/static/list/selectable_equipment = list (
 		"Dual Stun Baton" = /obj/item/melee/baton/dual/loaded,
+		"Light Amplification Goggles" = /obj/item/clothing/glasses/hud/security/lightamp,
 	)
 	return selectable_equipment
 
