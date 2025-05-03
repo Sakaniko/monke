@@ -390,4 +390,15 @@
 		M.adjust_drowsiness_up_to(8 SECONDS, 40 SECONDS)
 		M.adjust_pacifism(4 SECONDS)
 
+//Monkestation addition start
+/obj/item/assembly/flash/experimental
+	name = "experimental flash" //Basically a telebaton version of a flash, that's the same strength but has a longer time between uses while not needing charge.
+	desc = "A flash with a highly experimental bulb that cannot burn out along side an internal battery that self-charges. The internal battery needs a couple of seconds to recharge after a flash."
+	light_color = COLOR_RED_LIGHT
+	icon_state = "flash" //"experiflash"
+	inhand_icon_state = "flashtool" //"experiflashtool"
+	cooldown = 20 //Can't spam the flash since it can't burn out
+	burnout_resistance = 99999 //Definitely a hackjob but i cannot figure it out right now.
+
+//monkestation addition end
 #undef CONFUSION_STACK_MAX_MULTIPLIER

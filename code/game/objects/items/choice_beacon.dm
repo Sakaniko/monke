@@ -220,6 +220,7 @@
 	var/static/list/selectable_equipment = list (
 		"Dual Stun Baton" = /obj/item/melee/baton/dual/loaded,
 		"Light Amplification Goggles" = /obj/item/clothing/glasses/hud/security/lightamp,
+		"Experimental Flash" = /obj/item/assembly/flash/experimental,
 	)
 	return selectable_equipment
 
