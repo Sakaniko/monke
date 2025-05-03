@@ -660,8 +660,10 @@
 	worn_icon_state = "dual_baton"
 	force = 5 //Wield the damn thing
 	wound_bonus = 0
-	attack_verb_continuous = list("beats", "whacks")
-	attack_verb_simple = list("beat", "whack")
+	w_class = WEIGHT_CLASS_HUGE
+	slot_flags = ITEM_SLOT_BACK
+	attack_verb_continuous = list("beats", "whacks", "thwacks", "smacks", "crushes", "cracks")
+	attack_verb_simple = list("beat", "whack", "thwack", "smack", "crush", "crack")
 	block_chance = 15
 	block_sound = 'sound/weapons/block_blade.ogg'
 	armor_type = /datum/armor/dual_baton
