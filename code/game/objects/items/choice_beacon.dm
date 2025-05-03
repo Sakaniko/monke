@@ -180,7 +180,8 @@
 //Monkestation edit start
 
 //Gun Beacons
-// HoS weapon beacon
+//HoS weapon beacon
+//objective datum handled in objective_items.dm
 /obj/item/choice_beacon/hos_gun
 	name = "head of security's gun beacon"
 	desc = "A single use beacon to deliver a gunset of your choice to help with security detail."
@@ -195,21 +196,8 @@
 	)
 	return selectable_guns
 
-// Steal Objective, not just for Lawbringer but all their guns
-/datum/objective_item/steal/hosgun
-	name = "the head of security's personal weapon"
-	targetitem = /obj/item/choice_beacon/hos_gun
-	excludefromjob = list(JOB_HEAD_OF_SECURITY)
-	altitems = list(/obj/item/gun/ballistic/shotgun/automatic/combat/compact, /obj/item/gun/energy/e_gun/lawbringer, /obj/item/gun/energy/e_gun/hos)
-	item_owner = list(JOB_HEAD_OF_SECURITY)
-	exists_on_map = TRUE
-
-/obj/item/choice_beacon/hos_gun/add_stealing_item_objective()
-	return add_item_to_steal(src, /obj/item/choice_beacon/hos_gun)
-
 //Command equipment choice beacons
-//These sections all handle what are choices available in the beacons as well as creating the steal objectives for items that come from them
-//Captain
+//These sections all handle what are choices available in the beacons objective datums are handled in objective_items.dm
 /obj/item/choice_beacon/captain_equipment
 	name = "captain's equipment beacon"
 	desc = "A single use beacon to choose one of several NT items approved for use only by the Captain."
@@ -234,22 +222,10 @@
 	)
 	return selectable_equipment
 
-// Steal Objective for HoS' equipment
-/datum/objective_item/steal/hosequipment
-	name = "the head of security's prototype equipment"
-	targetitem = /obj/item/choice_beacon/hos_equipment
-	excludefromjob = list(JOB_HEAD_OF_SECURITY)
-	altitems = list(/obj/item/melee/baton/dual, /obj/item/melee/baton/dual/loaded)
-	item_owner = list(JOB_HEAD_OF_SECURITY)
-	exists_on_map = TRUE
-
-/obj/item/choice_beacon/hos_equipment/add_stealing_item_objective()
-	return add_item_to_steal(src, /obj/item/choice_beacon/hos_equipment)
-
 //HoP
 /obj/item/choice_beacon/hop_equipment
 	name = "head of personnell's equipment beacon"
-	desc = "A single use beacon to choose one of several lower-end experimental items deemed fit for use by the Head of Personnell only."
+	desc = "A single use beacon to choose one of several lower-end experimental items deemed fit for use by the Head of Personnel only."
 	company_source = "NanoTrasen Human Resources Division"
 	company_message = span_bold("Experimental Delivery Pod incoming, please stand back.")
 
@@ -291,7 +267,7 @@
 
 /obj/item/choice_beacon/ce_equipment/generate_display_names()
 	var/static/list/selectable_equipment = list (
-
+		"Advanced Magboots" = /obj/item/clothing/shoes/magboots/advance
 	)
 	return selectable_equipment
 //Monkestation edit end

@@ -280,6 +280,7 @@
 /obj/item/tank/jetpack/oxygen/captain/add_stealing_item_objective()
 	return add_item_to_steal(src, /obj/item/tank/jetpack/oxygen/captain)
 
+/* //monkestation removal: replaced with eqipment beacon objectives
 /datum/objective_item/steal/magboots
 	name = "the chief engineer's advanced magnetic boots"
 	targetitem = /obj/item/clothing/shoes/magboots/advance
@@ -289,6 +290,7 @@
 
 /obj/item/clothing/shoes/magboots/advance/add_stealing_item_objective()
 	return add_item_to_steal(src, /obj/item/clothing/shoes/magboots/advance)
+*/
 
 /datum/objective_item/steal/capmedal
 	name = "the medal of captaincy"
@@ -300,6 +302,7 @@
 /obj/item/clothing/accessory/medal/gold/captain/add_stealing_item_objective()
 	return add_item_to_steal(src, /obj/item/clothing/accessory/medal/gold/captain)
 
+/*monkestation removal: replaced with eqipment beacon objectives
 /datum/objective_item/steal/hypo
 	name = "the hypospray"
 	targetitem = /obj/item/reagent_containers/hypospray/cmo
@@ -309,6 +312,7 @@
 
 /obj/item/reagent_containers/hypospray/cmo/add_stealing_item_objective()
 	return add_item_to_steal(src, /obj/item/reagent_containers/hypospray/cmo)
+*/
 
 /datum/objective_item/steal/nukedisc
 	name = "the nuclear authentication disk"
@@ -331,6 +335,7 @@
 /obj/item/clothing/suit/hooded/ablative/add_stealing_item_objective()
 	return add_item_to_steal(src, /obj/item/clothing/suit/hooded/ablative)
 
+/*monkestation removal: replaced with eqipment beacon objectives
 /datum/objective_item/steal/reactive
 	name = "the reactive teleport armor"
 	targetitem = /obj/item/clothing/suit/armor/reactive/teleport
@@ -340,6 +345,85 @@
 
 /obj/item/clothing/suit/armor/reactive/teleport/add_stealing_item_objective()
 	return add_item_to_steal(src, /obj/item/clothing/suit/armor/reactive/teleport)
+*/
+
+//Monkestation addition start
+//Code until end of monkestation addition handles all the objectives for stealing
+
+//HoS' gun
+/datum/objective_item/steal/hos_gun
+	name = "the head of security's personal weapon"
+	targetitem = /obj/item/choice_beacon/hos_gun
+	excludefromjob = list(JOB_HEAD_OF_SECURITY)
+	altitems = list(/obj/item/gun/ballistic/shotgun/automatic/combat/compact, /obj/item/gun/energy/e_gun/lawbringer, /obj/item/gun/energy/e_gun/hos)
+	item_owner = list(JOB_HEAD_OF_SECURITY)
+	exists_on_map = TRUE
+
+/obj/item/choice_beacon/hos_gun/add_stealing_item_objective()
+	return add_item_to_steal(src, /obj/item/choice_beacon/hos_gun)
+
+//HoS' equipment
+/datum/objective_item/steal/hos_equipment
+	name = "the head of security's prototype equipment"
+	targetitem = /obj/item/choice_beacon/hos_equipment
+	excludefromjob = list(JOB_HEAD_OF_SECURITY)
+	altitems = list(/obj/item/melee/baton/dual, /obj/item/melee/baton/dual/loaded)
+	item_owner = list(JOB_HEAD_OF_SECURITY)
+	exists_on_map = TRUE
+
+/obj/item/choice_beacon/hos_equipment/add_stealing_item_objective()
+	return add_item_to_steal(src, /obj/item/choice_beacon/hos_equipment)
+
+//HoP's equipment
+/datum/objective_item/steal/hop_equipment
+	name = "the head of personnel's experimental equipment"
+	targetitem = /obj/item/choice_beacon/hop_equipment
+	excludefromjob = list(JOB_HEAD_OF_PERSONNEL)
+	altitems = list()
+	item_owner = list(JOB_HEAD_OF_PERSONNEL)
+	exists_on_map = TRUE
+
+/obj/item/choice_beacon/hop_equipment/add_stealing_item_objective()
+	return add_item_to_steal(src, /obj/item/choice_beacon/hop_equipment)
+
+//CMO's equipment
+/datum/objective_item/steal/cmo_equipment
+	name = "the chief medical officer's prototype equipment"
+	targetitem = /obj/item/choice_beacon/hos_equipment
+	excludefromjob = list(JOB_CHIEF_MEDICAL_OFFICER)
+	altitems = list(/obj/item/reagent_containers/hypospray/cmo)
+	item_owner = list(JOB_CHIEF_MEDICAL_OFFICER)
+	exists_on_map = TRUE
+
+/obj/item/choice_beacon/cmo_equipment/add_stealing_item_objective()
+	return add_item_to_steal(src, /obj/item/choice_beacon/cmo_equipment)
+
+//RD's equipment
+/datum/objective_item/steal/rd_equipment
+	name = "the research director's prototype equipment"
+	targetitem = /obj/item/choice_beacon/rd_equipment
+	excludefromjob = list(JOB_RESEARCH_DIRECTOR)
+	altitems = list()
+	item_owner = list(JOB_RESEARCH_DIRECTOR)
+	exists_on_map = TRUE
+
+/obj/item/choice_beacon/rd_equipment/add_stealing_item_objective()
+	return add_item_to_steal(src, /obj/item/choice_beacon/rd_equipment)
+
+//CE's equipment
+/datum/objective_item/steal/ce_equipment
+	name = "the chief engineer's advanced equipment"
+	targetitem = /obj/item/choice_beacon/ce_equipment
+	excludefromjob = list(JOB_CHIEF_ENGINEER)
+	altitems = list(/obj/item/clothing/shoes/magboots/advance)
+	item_owner = list(JOB_CHIEF_ENGINEER)
+	exists_on_map = TRUE
+
+/obj/item/choice_beacon/ce_equipment/add_stealing_item_objective()
+	return add_item_to_steal(src, /obj/item/choice_beacon/ce_equipment)
+
+//Monkestation addition end
+
 
 /datum/objective_item/steal/documents
 	name = "any set of secret documents of any organization"
