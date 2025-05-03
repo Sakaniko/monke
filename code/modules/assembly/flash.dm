@@ -393,11 +393,11 @@
 //Monkestation addition start
 /obj/item/assembly/flash/experimental
 	name = "experimental flash" //Basically a telebaton version of a flash, that's the same strength but has a longer time between uses while not needing charge.
-	desc = "A flash with a highly experimental bulb that cannot burn out along side an internal battery that self-charges. The internal battery needs a couple of seconds to recharge after a flash."
+	desc = "A flash with a highly experimental bulb that cannot burn out along side an internal battery that self-charges. The internal battery needs a few seconds to recharge after a flash."
 	light_color = COLOR_RED_LIGHT
-	icon_state = "flash" //"experiflash"
+	icon_state = "experiflash"
 	inhand_icon_state = "flashtool" //"experiflashtool"
-	cooldown = 20 //Can't spam the flash since it can't burn out
+	cooldown = 25 //Very long cooldown but never burnsout
 	burnout_resistance = 99999 //Definitely a hackjob but i cannot figure it out right now.
 
 //monkestation addition end

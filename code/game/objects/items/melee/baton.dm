@@ -1,4 +1,4 @@
-/obj/item/melee/baton
+	/obj/item/melee/baton
 	name = "police baton"
 	desc = "A wooden truncheon for beating criminal scum."
 	desc_controls = "Left click to stun, right click to harm."
