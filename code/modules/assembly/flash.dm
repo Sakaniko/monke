@@ -396,10 +396,11 @@
 	desc = "A flash with a highly experimental bulb that cannot burn out along side an internal battery that self-charges. The internal battery needs a few seconds to recharge after a flash."
 	light_color = COLOR_RED_LIGHT
 	icon_state = "experiflash"
-	inhand_icon_state = "flashtool" //"experiflashtool"
+	inhand_icon_state = "experiflashtool"
+	flashing_overlay = "experiflash-f"
 	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | ACID_PROOF //It can be a theft objective
-	cooldown = 25 //Very long cooldown but never burnsout
-	burnout_resistance = 99999 //Definitely a hackjob but i cannot figure it out right now.
+	cooldown = 25 //Very long cooldown but never burns out
+	burnout_resistance = 99999 //Definitely a hackjob but its easy
 
 //monkestation addition end
 #undef CONFUSION_STACK_MAX_MULTIPLIER
