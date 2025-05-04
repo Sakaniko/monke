@@ -210,9 +210,9 @@
 //monkestation addition start
 /obj/item/clothing/glasses/hud/security/lightamp
 	name = "light amplification goggles"
-	desc = "Prototype goggles that brightens your vision, making it possible to see perfectly in all envrionments, while using an on-board AI to prevent over-exposure. Weak to sudden bursts of light such as flashes. Comes with an integrated security HUD."
-	icon_state = "nvgmeson"//"amp_glasses"
-	inhand_icon_state = "nvgmeson"//"amp_glasses"
+	desc = "Prototype goggles that brightens your vision, making it possible to see perfectly in all envrionments, while using an on-board, low-level AI to prevent over-exposure. Weak to sudden bursts of light such as flashes. Comes with an integrated security HUD."
+	icon_state = "lightamp"
+	inhand_icon_state = "lightamp"
 	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | ACID_PROOF //theft objective
 	flags_cover = GLASSESCOVERSEYES
 	flash_protect = FLASH_PROTECTION_SENSITIVE //Sudden bright lights mess you up
