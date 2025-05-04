@@ -206,3 +206,16 @@
 
 /obj/item/gun/energy/e_gun/lethal
 	ammo_type = list(/obj/item/ammo_casing/energy/laser, /obj/item/ammo_casing/energy/disabler)
+
+//monkestation addition start
+/obj/item/gun/energy/e_gun/laserpen
+	name = "'moonraker' laser pen"
+	desc = "A regular fancy pen fitted with a micro-cell and laser diode, able to fire both disable and kill laser beams at the cost of a reduced capacity. Uses those same lasers to create the paperwork that the crew hates."
+	icon = 'icons/obj/bureaucracy.dmi'
+	icon_state = "pen-fountain"//"pen-laser"
+	ammo_type = list(/obj/item/ammo_casing/energy/disabler, /obj/item/ammo_casing/energy/laser)
+	cell_type = /obj/item/stock_parts/cell/mini_egun //only small capacity
+	w_class = WEIGHT_CLASS_TINY
+	slot_flags = ITEM_SLOT_BELT | ITEM_SLOT_EARS
+
+
