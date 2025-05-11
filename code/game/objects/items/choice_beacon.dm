@@ -245,7 +245,8 @@
 
 /obj/item/choice_beacon/cmo_equipment/generate_display_names()
 	var/static/list/selectable_equipment = list (
-		"Hypospray" = /obj/item/reagent_containers/hypospray/cmo
+		"Hypospray" = /obj/item/reagent_containers/hypospray/cmo,
+		"Bluespace Defibrillator" = /obj/item/shockpaddles/cmo,
 	)
 	return selectable_equipment
 //RD

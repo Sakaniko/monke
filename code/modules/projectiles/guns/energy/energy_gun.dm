@@ -214,7 +214,7 @@
 	icon = 'icons/obj/bureaucracy.dmi'
 	icon_state = "pen-fountain"//"pen-laser"
 	ammo_type = list(/obj/item/ammo_casing/energy/disabler, /obj/item/ammo_casing/energy/laser)
-	cell_type = /obj/item/stock_parts/cell/mini_egun //only small capacity
+	cell_type = /obj/item/stock_parts/cell/mini_egun //only small
 	w_class = WEIGHT_CLASS_TINY
 	slot_flags = ITEM_SLOT_BELT | ITEM_SLOT_EARS
 

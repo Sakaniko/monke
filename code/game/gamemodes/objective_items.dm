@@ -391,7 +391,7 @@
 	name = "the chief medical officer's prototype equipment"
 	targetitem = /obj/item/choice_beacon/hos_equipment
 	excludefromjob = list(JOB_CHIEF_MEDICAL_OFFICER)
-	altitems = list(/obj/item/reagent_containers/hypospray/cmo)
+	altitems = list(/obj/item/reagent_containers/hypospray/cmo, /obj/item/shockpaddles/cmo)
 	item_owner = list(JOB_CHIEF_MEDICAL_OFFICER)
 	exists_on_map = TRUE
 

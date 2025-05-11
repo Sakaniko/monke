@@ -732,5 +732,26 @@
 /obj/item/shockpaddles/syndicate/cyborg
 	req_defib = FALSE
 
+//Monkestation addition
+/obj/item/shockpaddles/cmo
+	name = "bluespace defibrillator"
+	desc = "A rare, bluespace enhanced defibrillator. Smaller, infinite charge and faster cooldown"
+	icon_state = "ntpaddles0" //"bluespacedefib"
+	inhand_icon_state = "ntpaddles0"
+	base_icon_state = "ntpaddles"
+	inhand_icon_state = null
+	req_defib = FALSE
+	w_class = WEIGHT_CLASS_SMALL
+	slot_flags = ITEM_SLOT_BELT
+
+
+/obj/item/defibrillator/compact/cmo/loaded
+	cell_removable = FALSE
+
+/obj/item/defibrillator/compact/cmo/loaded/Initialize()
+	. = ..()
+	cell = new /obj/item/stock_parts/cell/infinite(src)
+	update_power()
+
 #undef HALFWAYCRITDEATH
 #undef DEFIB_CAN_HURT
