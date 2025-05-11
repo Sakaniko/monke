@@ -219,3 +219,13 @@
 	slot_flags = ITEM_SLOT_BELT | ITEM_SLOT_EARS
 
 
+/obj/item/gun/energy/e_gun/laserpen/get_writing_implement_details()
+	return list(
+		interaction_mode = MODE_WRITING,
+		font = PEN_FONT,
+		colour = "#000000",
+		use_bold = FALSE,
+	)
+
+/obj/item/gun/energy/e_gun/laserpen/add_seclight_point()
+	return

@@ -348,7 +348,7 @@
 */
 
 //Monkestation addition start
-//Code until end of monkestation addition handles all the objectives for stealing
+//Code until end of monkestation addition handles all the objectives for stealing head of staff equipment
 
 //HoS' gun
 /datum/objective_item/steal/hos_gun
@@ -379,7 +379,7 @@
 	name = "the head of personnel's experimental equipment"
 	targetitem = /obj/item/choice_beacon/hop_equipment
 	excludefromjob = list(JOB_HEAD_OF_PERSONNEL)
-	altitems = list()
+	altitems = list(/obj/item/gun/energy/e_gun/laserpen,)
 	item_owner = list(JOB_HEAD_OF_PERSONNEL)
 	exists_on_map = TRUE
 
