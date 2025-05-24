@@ -13,6 +13,12 @@
 	var/active = FALSE
 	var/datum/beam/current_beam = null
 	var/mounted = 0 //Denotes if this is a handheld or mounted version
+	//Monkestation addition start
+	var/bruteheal = -4 //These are negative because its adjusting damage values every beamtick!
+	var/fireheal = -4
+	var/toxheal = -1
+	var/oxyheal = -1
+	//Monkestation addition end
 
 	weapon_weight = WEAPON_MEDIUM
 
@@ -144,10 +150,10 @@
 /obj/item/gun/medbeam/proc/on_beam_tick(mob/living/target)
 	if(target.health != target.maxHealth)
 		new /obj/effect/temp_visual/heal(get_turf(target), COLOR_HEALING_CYAN)
-	target.adjustBruteLoss(-4)
-	target.adjustFireLoss(-4)
-	target.adjustToxLoss(-1, forced = TRUE)
-	target.adjustOxyLoss(-1, forced = TRUE)
+	target.adjustBruteLoss(bruteheal)
+	target.adjustFireLoss(fireheal)
+	target.adjustToxLoss(toxheal, forced = TRUE)
+	target.adjustOxyLoss(oxyheal, forced = TRUE)
 	return
 
 /obj/item/gun/medbeam/proc/on_beam_release(mob/living/target)
@@ -155,6 +161,18 @@
 
 /obj/effect/ebeam/medical
 	name = "medical beam"
+
+//monkestation add start
+/obj/item/gun/medbeam/advanced
+	name = "Advanced Medical Beamgun"
+	desc = "An experimental version of a regular beamgun, healing faster. Just don't cross ths streams, seriously."
+	icon = 'icons/obj/chronos.dmi'
+	icon_state = "chronogun"
+	inhand_icon_state = "chronogun"
+	bruteheal = -5 //1.25x higher brute/fire healing
+	fireheal = -5
+	toxheal = -2 //2x higher tox/oxy healing
+	oxyheal = -2
 
 //////////////////////////////Mech Version///////////////////////////////
 /obj/item/gun/medbeam/mech

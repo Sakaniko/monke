@@ -733,7 +733,7 @@
 	req_defib = FALSE
 
 //Monkestation addition
-/obj/item/shockpaddles/cmo
+/obj/item/shockpaddles/bluespace
 	name = "bluespace defibrillator"
 	desc = "A rare, bluespace enhanced defibrillator. Smaller, infinite charge and faster cooldown"
 	icon_state = "ntpaddles0" //"bluespacedefib"
