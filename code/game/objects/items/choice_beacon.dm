@@ -258,6 +258,7 @@
 
 /obj/item/choice_beacon/rd_equipment/generate_display_names()
 	var/static/list/selectable_equipment = list (
+		"O.M.N.I. HUD" = /obj/item/clothing/glasses/hud/omni
 
 	)
 	return selectable_equipment

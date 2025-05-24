@@ -403,7 +403,7 @@
 	name = "the research director's prototype equipment"
 	targetitem = /obj/item/choice_beacon/rd_equipment
 	excludefromjob = list(JOB_RESEARCH_DIRECTOR)
-	altitems = list()
+	altitems = list(/obj/item/clothing/glasses/hud/omni,)
 	item_owner = list(JOB_RESEARCH_DIRECTOR)
 	exists_on_map = TRUE
 

@@ -127,6 +127,36 @@
 	hud_trait = TRAIT_SECURITY_HUD
 	glass_colour_type = /datum/client_colour/glass_colour/red
 
+//Monkestation addition start
+/obj/item/clothing/glasses/hud/omni
+	name = "O.M.N.I. HUD"
+	desc = "'Omniscient Machine iN providing Intelligence'. This HUD provides the effects of all standard NT huds, including Security, Medical and Diagnostic HUDs. Alongside coming with meson vision and welding and flash protection."
+	icon_state = "healthhud"
+	hud_type = DATA_HUD_DIAGNOSTIC_BASIC
+	clothing_traits = TRAIT_REAGENT_SCANNER
+	vision_flags = SEE_TURFS
+	glass_colour_type = /datum/client_colour/glass_colour/purple
+	var/list/hudlist = list(DATA_HUD_MEDICAL_ADVANCED, DATA_HUD_DIAGNOSTIC_ADVANCED, DATA_HUD_SECURITY_ADVANCED)
+
+/obj/item/clothing/glasses/hud/omni/equipped(mob/user, slot)
+	. = ..()
+	if(!(slot & ITEM_SLOT_EYES))
+		return
+	if(ishuman(user))
+		for(var/hud in hudlist)
+			var/datum/atom_hud/our_hud = GLOB.huds[hud]
+			our_hud.show_to(user)
+		user.add_traits(list(TRAIT_MEDICAL_HUD, TRAIT_SECURITY_HUD, TRAIT_DIAGNOSTIC_HUD), GLASSES_TRAIT)
+
+/obj/item/clothing/glasses/hud/omni/dropped(mob/user)
+	. = ..()
+	user.remove_traits(list(TRAIT_MEDICAL_HUD, TRAIT_SECURITY_HUD, TRAIT_DIAGNOSTIC_HUD), GLASSES_TRAIT)
+	if(ishuman(user))
+		for(var/hud in hudlist)
+			var/datum/atom_hud/our_hud = GLOB.huds[hud]
+			our_hud.hide_from(user)
+//Monkestation addition end
+
 /obj/item/clothing/glasses/hud/security/chameleon
 	name = "chameleon security HUD"
 	desc = "A stolen security HUD integrated with Syndicate chameleon technology. Provides flash protection."
