@@ -367,7 +367,7 @@
 	name = "the chief medical officer's prototype equipment"
 	targetitem = /obj/item/choice_beacon/cmo_equipment
 	excludefromjob = list(JOB_CHIEF_MEDICAL_OFFICER)
-	altitems = list(/obj/item/reagent_containers/hypospray/cmo, /obj/item/shockpaddles/bluespace)
+	altitems = list(/obj/item/reagent_containers/hypospray/cmo, /obj/item/shockpaddles/bluespace, /obj/item/gun/medbeam/advanced)
 	item_owner = list(JOB_CHIEF_MEDICAL_OFFICER)
 	exists_on_map = TRUE
 
@@ -379,7 +379,7 @@
 	name = "the research director's prototype equipment"
 	targetitem = /obj/item/choice_beacon/rd_equipment
 	excludefromjob = list(JOB_RESEARCH_DIRECTOR)
-	altitems = list(/obj/item/clothing/glasses/hud/omni,)
+	altitems = list(/obj/item/clothing/glasses/hud/omni, /obj/item/clothing/suit/armor/reactive/experimental)
 	item_owner = list(JOB_RESEARCH_DIRECTOR)
 	exists_on_map = TRUE
 

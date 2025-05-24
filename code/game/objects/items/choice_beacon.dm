@@ -209,7 +209,7 @@
 	var/static/list/selectable_equipment = list (
 		"Hypospray" = /obj/item/reagent_containers/hypospray/cmo,
 		"Bluespace Defibrillator" = /obj/item/shockpaddles/bluespace,
-		"Advaned Medbeam Gun" = /obj/item/gun/medbeam/advanced,
+		"Advanced Medbeam Gun" = /obj/item/gun/medbeam/advanced,
 	)
 	return selectable_equipment
 //RD
@@ -222,6 +222,7 @@
 /obj/item/choice_beacon/rd_equipment/generate_display_names()
 	var/static/list/selectable_equipment = list (
 		"O.M.N.I. HUD" = /obj/item/clothing/glasses/hud/omni
+		"Experimental Reactive Armor" = /obj/item/clothing/suit/armor/reactive/experimental
 
 	)
 	return selectable_equipment
