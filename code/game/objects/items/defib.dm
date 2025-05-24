@@ -409,7 +409,8 @@
 	. = ..()
 	ADD_TRAIT(src, TRAIT_NO_STORAGE_INSERT, TRAIT_GENERIC) //stops shockpaddles from being inserted in BoH
 	if(!req_defib)
-		return //If it doesn't need a defib, just say it exists
+		REMOVE_TRAIT(src, TRAIT_NO_STORAGE_INSERT, TRAIT_GENERIC)
+		return //If it doesn't need a defib, just say it exists and undo storage blocking
 	if (!loc || !istype(loc, /obj/item/defibrillator)) //To avoid weird issues from admin spawns
 		return INITIALIZE_HINT_QDEL
 	defib = loc
@@ -735,23 +736,13 @@
 //Monkestation addition
 /obj/item/shockpaddles/bluespace
 	name = "bluespace defibrillator"
-	desc = "A rare, bluespace enhanced defibrillator. Smaller, infinite charge and faster cooldown"
+	desc = "Enhanced with the power of Bluespace technology, this defibrillator is able to fit within pockets and is usable without a base unit."
 	icon_state = "ntpaddles0" //"bluespacedefib"
 	inhand_icon_state = "ntpaddles0"
 	base_icon_state = "ntpaddles"
 	inhand_icon_state = null
 	req_defib = FALSE
 	w_class = WEIGHT_CLASS_SMALL
-	slot_flags = ITEM_SLOT_BELT
-
-
-/obj/item/defibrillator/compact/cmo/loaded
-	cell_removable = FALSE
-
-/obj/item/defibrillator/compact/cmo/loaded/Initialize()
-	. = ..()
-	cell = new /obj/item/stock_parts/cell/infinite(src)
-	update_power()
 
 #undef HALFWAYCRITDEATH
 #undef DEFIB_CAN_HURT
