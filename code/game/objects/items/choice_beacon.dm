@@ -198,17 +198,6 @@
 
 //Command equipment choice beacons
 //These sections all handle what are choices available in the beacons objective datums are handled in objective_items.dm
-/obj/item/choice_beacon/captain_equipment
-	name = "captain's equipment beacon"
-	desc = "A single use beacon to choose one of several NT items approved for use only by the Captain."
-	company_source = "Central Command"
-	company_message = span_bold("Equipment Delivery Pod incoming, please stand back.")
-
-/obj/item/choice_beacon/captain_equipment/generate_display_names()
-	var/static/list/selectable_equipment = list (
-
-	)
-	return selectable_equipment
 //HoS
 /obj/item/choice_beacon/hos_equipment
 	name = "head of security's equipment beacon"
