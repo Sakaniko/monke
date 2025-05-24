@@ -365,7 +365,7 @@
 //CMO's equipment
 /datum/objective_item/steal/cmo_equipment
 	name = "the chief medical officer's prototype equipment"
-	targetitem = /obj/item/choice_beacon/hos_equipment
+	targetitem = /obj/item/choice_beacon/cmo_equipment
 	excludefromjob = list(JOB_CHIEF_MEDICAL_OFFICER)
 	altitems = list(/obj/item/reagent_containers/hypospray/cmo, /obj/item/shockpaddles/bluespace)
 	item_owner = list(JOB_CHIEF_MEDICAL_OFFICER)

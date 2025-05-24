@@ -48,7 +48,6 @@
 		/obj/item/lipstick,
 		/obj/item/flashlight/pen,
 		/obj/item/clothing/mask/cigarette,
-		/obj/item/gun/energy/e_gun/laserpen, //monkestation edit
 	)
 
 /obj/item/modular_computer/pda/Initialize(mapload)

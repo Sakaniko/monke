@@ -20,7 +20,6 @@
 	new /obj/item/gun/energy/e_gun(src)
 	new /obj/item/door_remote/captain(src)
 	new /obj/item/storage/photo_album/captain(src)
-	new /obj/item/choice_beacon/captain_equipment(src)//monkestation edit: captain equipment isn't an antag theft obj
 
 /obj/structure/closet/secure_closet/hop
 	name = "head of personnel's locker"
@@ -46,10 +45,6 @@
 	new /obj/item/storage/photo_album/hop(src)
 	new /obj/item/storage/lockbox/medal/hop(src)
 	new /obj/item/clothing/suit/space/hardsuit/hop(src) //monkestation addition
-
-	// Traitor steal obnjectives
-	new /obj/item/choice_beacon/hop_equipment(src)//monkestation addition
-
 
 /obj/structure/closet/secure_closet/hos
 	name = "head of security's locker"
@@ -79,7 +74,6 @@
 
 	// Traitor steal objectives
 	new /obj/item/choice_beacon/hos_gun(src) //monkestation edit
-	new /obj/item/choice_beacon/hos_equipment(src) //monkestation edit: command equip beacons
 	new /obj/item/pinpointer/nuke(src)
 
 /obj/structure/closet/secure_closet/warden

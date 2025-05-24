@@ -33,6 +33,18 @@
 	time = 4 SECONDS
 	category = CAT_WEAPON_MELEE
 
+/datum/crafting_recipe/dual_baton
+	name = "Dual Stun Baton"
+	result = /obj/item/melee/baton/dual
+	reqs = list(
+		/obj/item/stack/sheet/iron = 5,
+		/obj/item/stack/cable_coil = 10,
+		/obj/item/melee/baton/security = 2,
+	)
+	tool_behaviors = list(TOOL_SCREWDRIVER, TOOL_WIRECUTTER)
+	time = 12 SECONDS
+	category = CAT_WEAPON_MELEE
+
 /datum/crafting_recipe/tailclub
 	name = "Tail Club"
 	result = /obj/item/tailclub
