@@ -224,18 +224,6 @@
 	)
 	return selectable_equipment
 
-//HoP
-/obj/item/choice_beacon/hop_equipment
-	name = "head of personnel's equipment beacon"
-	desc = "A single use beacon to choose one of several lower-end experimental items deemed fit for use by the Head of Personnel only."
-	company_source = "NanoTrasen Human Resources Division"
-	company_message = span_bold("Experimental Delivery Pod incoming, please stand back.")
-
-/obj/item/choice_beacon/hop_equipment/generate_display_names()
-	var/static/list/selectable_equipment = list (
-		"'Moonraker' Laser Pen" = /obj/item/gun/energy/e_gun/laserpen
-	)
-	return selectable_equipment
 //CMO
 /obj/item/choice_beacon/cmo_equipment
 	name = "chief medical officer's equipment beacon"
