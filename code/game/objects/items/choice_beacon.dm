@@ -198,21 +198,6 @@
 
 //Command equipment choice beacons
 //These sections all handle what are choices available in the beacons objective datums are handled in objective_items.dm
-//HoS
-/obj/item/choice_beacon/hos_equipment
-	name = "head of security's equipment beacon"
-	desc = "A single use beacon to choose one of several prototype security items ready to be field tested by the Head of Security."
-	company_source = "NanoTrasen Security Division"
-	company_message = span_bold("Prototype Delivery Pod incoming, please stand back.")
-
-/obj/item/choice_beacon/hos_equipment/generate_display_names()
-	var/static/list/selectable_equipment = list (
-		"Dual Stun Baton" = /obj/item/melee/baton/dual/loaded,
-		"Light Amplification Goggles" = /obj/item/clothing/glasses/hud/security/lightamp,
-		"Experimental Flash" = /obj/item/assembly/flash/experimental,
-	)
-	return selectable_equipment
-
 //CMO
 /obj/item/choice_beacon/cmo_equipment
 	name = "chief medical officer's equipment beacon"

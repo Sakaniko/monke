@@ -362,18 +362,6 @@
 /obj/item/choice_beacon/hos_gun/add_stealing_item_objective()
 	return add_item_to_steal(src, /obj/item/choice_beacon/hos_gun)
 
-//HoS' equipment
-/datum/objective_item/steal/hos_equipment
-	name = "the head of security's prototype equipment"
-	targetitem = /obj/item/choice_beacon/hos_equipment
-	excludefromjob = list(JOB_HEAD_OF_SECURITY)
-	altitems = list(/obj/item/melee/baton/dual, /obj/item/melee/baton/dual/loaded, /obj/item/clothing/glasses/hud/security/lightamp, /obj/item/assembly/flash/experimental)
-	item_owner = list(JOB_HEAD_OF_SECURITY)
-	exists_on_map = TRUE
-
-/obj/item/choice_beacon/hos_equipment/add_stealing_item_objective()
-	return add_item_to_steal(src, /obj/item/choice_beacon/hos_equipment)
-
 //CMO's equipment
 /datum/objective_item/steal/cmo_equipment
 	name = "the chief medical officer's prototype equipment"
