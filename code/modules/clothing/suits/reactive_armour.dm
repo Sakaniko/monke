@@ -489,3 +489,64 @@
 
 /obj/item/clothing/suit/armor/reactive/ectoplasm/emp_activation(mob/living/carbon/human/owner, atom/movable/hitby, attack_text = "the attack", final_block_chance = 0, damage = 0, attack_type = MELEE_ATTACK)
 	owner.reagents?.add_reagent(/datum/reagent/inverse/helgrasp, 20)
+
+//Monkestation addition
+/obj/item/clothing/suit/armor/reactive/experimental
+	name = "experimental reactive armor"
+	desc = "An experimental suit of armor fitted with multiple anomaly cores, able to cycle between different effects to the user's current needs. Do not bring into contact with Electro Magnetic Pulses."
+	desc_controls = "Alt click to change armor type."
+	emp_message = span_warning("The reactive armor sparks and warning lights flash as a horrible metal screetch comes out of it.")
+	cooldown_message = span_danger("Current anomaly cycle recharging. Please wait for callibration to complete.")
+	var/anomaly_choice = null //Where we store the choice for what to switch to before its applied.
+	var/anomaly_type = "teleporter" //The current anomaly type selected, defaults to teleport
+
+/obj/item/clothing/suit/armor/reactive/experimental/AltClick(mob/user)
+	. = ..()
+	open_options_menu(user) //On alt click, open menu to choose anomaly armor type
+
+/obj/item/clothing/suit/armor/reactive/experimental/proc/generate_display_names()
+	return list()
+
+/obj/item/clothing/suit/armor/reactive/experimental/proc/open_options_menu(mob/user)
+	var/list/display_names = generate_display_names()
+	if(!length(display_names))
+		return
+	var/choice = tgui_input_list(user, "Please select anomaly mode to activate.", "Reactive Armor Modification", display_names)
+	if(isnull(choice) || isnull(display_names[choice]))
+		return
+	if(!ishuman(user))
+		return
+	change_type(display_names[choice], user)
+
+//Now we set the armor to the selected type
+/obj/item/clothing/suit/armor/reactive/experimental/proc/change_type(var/anomaly_choice, mob/living/user)
+	to_chat(user, span_notice("Experimental reactive armor type change to: [anomaly_choice]"))
+	anomaly_type = anomaly_choice
+
+
+/obj/item/clothing/suit/armor/reactive/experimental/generate_display_names()
+	var/static/list/armor_list = list(
+		"Teleporter" = "Teleporter",
+		"Incendiary" = "Incendiary",
+		"Stealth" = "Stealth",
+		"Tesla" = "Tesla",
+		"Repulse" = "Repulse",
+		"Hallucination" = "Hallucination",
+		"Bioscramble" = "Bioscramble",
+		"Barricade" = "Barricade",
+		"Possession" = "Possession",
+	)
+	return armor_list
+
+/obj/item/clothing/suit/armor/reactive/experimental/reactive_activation(mob/living/carbon/human/owner, atom/movable/hitby, attack_text = "the attack", final_block_chance = 0, damage = 0, attack_type = MELEE_ATTACK)
+	switch(anomaly_type)
+		if("Teleporter")
+		if("Incendiary")
+		if("Stealth")
+		if("Tesla")
+		if("Repulse")
+		if("Hallucination")
+		if("Bioscramble")
+		if("Barricade")
+		if("Possession")
+
