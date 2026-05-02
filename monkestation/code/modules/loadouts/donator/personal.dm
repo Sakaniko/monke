@@ -28,7 +28,7 @@
 	requires_purchase = FALSE
 
 /datum/loadout_item/under/jumpsuit/draculass
-	name = "Draculass Dress"
+	name = "Draculass Very Pretty"
 	item_path = /obj/item/clothing/under/costume/draculass
 	donator_only = TRUE
 	requires_purchase = FALSE
