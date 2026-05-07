@@ -58,7 +58,7 @@
 	attack_verb_simple = list("heal", "medical", "tap", "poke", "analyze")
 	///var to hold the name of the person who suicided
 	var/suicider
-
+//test
 /obj/item/wrench/medical/examine(mob/user)
 	. = ..()
 	if(suicider)
