@@ -32,3 +32,7 @@
 // much more bearable than monoplegic
 #define QUIRK_COST_PROSTHETIC_LIMB -3
 #define QUIRK_HARDCORE_PROSTHETIC_LIMB 3
+
+// You start with no limb, this doesn't mean you can't just get a new one though, so it is inbetween prosthetic and monoplegic.
+#define QUIRK_COST_AMPUTEE -4
+#define QUIRK_HARDCORE_AMPUTEE 4

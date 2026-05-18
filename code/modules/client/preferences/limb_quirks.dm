@@ -30,6 +30,10 @@
 	savefile_key = "monoplegic"
 	quirk_name = "Monoplegic"
 
+/datum/preference/choiced/limb/amputee
+	savefile_key = "amputee"
+	quirk_name = "Amputee"
+
 /// Preference for hemiplegic players to choose a specific side
 /datum/preference/choiced/hemiplegic_side
 	category = PREFERENCE_CATEGORY_SECONDARY_FEATURES
