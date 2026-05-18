@@ -7,12 +7,12 @@ export const prosthetic: FeatureChoiced = {
 };
 
 export const monoplegic: FeatureChoiced = {
-  name: 'Amputated Limb',
+  name: 'Paralysed Limb',
   component: FeatureDropdownInput,
 };
 
 export const amputee: FeatureChoiced = {
-  name: 'Missing Limb',
+  name: 'Amputated Limb',
   component: FeatureDropdownInput,
 }
 
