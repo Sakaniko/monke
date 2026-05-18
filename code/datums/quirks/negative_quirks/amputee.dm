@@ -1,7 +1,7 @@
 /datum/quirk/amputee
 	name = "Amputee"
-	desc = "You're missing a limb, either from a past accident or illness."
-	icon = "tg-prosthetic-leg"
+	desc = "You are missing one of your limbs, for reasons only you know."
+	icon = FA_ICON_USER_SLASH //this is the best icon I could find.
 	value = QUIRK_COST_AMPUTEE
 	hardcore_value = QUIRK_HARDCORE_AMPUTEE
 	quirk_flags = QUIRK_HUMAN_ONLY | QUIRK_CHANGES_APPEARANCE | QUIRK_DONT_CLONE
@@ -9,7 +9,7 @@
 	var/slot_string = "limb"
 	/// The slot to DESTROY, in GLOB.limb_zones (both arms and both legs)
 	var/limb_zone
-	species_blacklist = list(SPECIES_OOZELING) //No free points for you!
+	species_blacklist = list(SPECIES_OOZELING) //Species that would just negate missing a limb.
 
 	var/obj/item/bodypart/amputated_limb //Variable where the limb that should be removed is stored
 

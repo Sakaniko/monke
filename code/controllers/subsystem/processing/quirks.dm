@@ -57,6 +57,7 @@ PROCESSING_SUBSYSTEM_DEF(quirks)
 		list("Prosthetic Limb", "Monoplegic"),
 		list("Cyborg Pre-screened dogtag", "Unborgable"),
 		list("Revival Blacklist", "Uncloneable Neurons"),
+		list("Amputee", "Quadruple Amputee", "Prosthetic Limb"), //Amputee can be used with Monoplegic on same limb to prevent replacement.
 		//MONKESTATION ADDITION END
 	)
 
