@@ -33,6 +33,6 @@
 #define QUIRK_COST_PROSTHETIC_LIMB -3
 #define QUIRK_HARDCORE_PROSTHETIC_LIMB 3
 
-//Even though this is worse than prosthetic limb, if you are running monoplegic, it is free points if you use it on the same limb that is disabled, so we keep it the same.
-#define QUIRK_COST_AMPUTEE -3
-#define QUIRK_HARDCORE_AMPUTEE 3
+//Same as Monoplegic, since it is an alternative that just has you missing the limb.
+#define QUIRK_COST_AMPUTEE -6
+#define QUIRK_HARDCORE_AMPUTEE 6

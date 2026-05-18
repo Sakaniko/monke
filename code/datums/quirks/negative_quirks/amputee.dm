@@ -1,6 +1,6 @@
 /datum/quirk/amputee
 	name = "Amputee"
-	desc = "You are missing one of your limbs, for reasons only you know."
+	desc = "You are missing one of your limbs, for reasons only you know. Even if you replace it, the limb will never work."
 	icon = FA_ICON_USER_SLASH //this is the best icon I could find.
 	value = QUIRK_COST_AMPUTEE
 	hardcore_value = QUIRK_HARDCORE_AMPUTEE
@@ -22,6 +22,7 @@
 	medical_record_text = "Patient is missing their [slot_string]." //Medical Records text
 	var/mob/living/carbon/human/human_holder = quirk_holder
 
+
 	switch (limb_zone) //Check which limb the character has selected and save it to the variable...
 		if (BODY_ZONE_L_ARM)
 			amputated_limb = human_holder.get_bodypart(BODY_ZONE_L_ARM)
@@ -32,8 +33,12 @@
 		if (BODY_ZONE_R_LEG)
 			amputated_limb = human_holder.get_bodypart(BODY_ZONE_R_LEG)
 
+	human_holder.gain_trauma(new /datum/brain_trauma/severe/paralysis/limb(amputated_limb), TRAUMA_RESILIENCE_ABSOLUTE) //Make sure if they replace their limb, it still won't work.
+
 	amputated_limb.drop_limb() //...then remove it...
-	qdel(amputated_limb) //then delete it once its removed, so it isn't just on the floor.
+	qdel(amputated_limb) //...then delete it once its removed, so it isn't just on the floor.
+
+
 
 /datum/quirk/amputee/post_add()
 	to_chat(quirk_holder, span_bolddanger("Your [slot_string] is missing."))
@@ -44,3 +49,4 @@
 
 	var/mob/living/carbon/human/human_holder = quirk_holder
 	human_holder.return_and_replace_bodypart(amputated_limb) //Use return and replace instead of reset because they don't have an arm to reset.
+	human_holder.cure_trauma_type(/datum/brain_trauma/severe/paralysis/limb, TRAUMA_RESILIENCE_ABSOLUTE) //And give them limb control back.
