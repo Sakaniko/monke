@@ -13,6 +13,9 @@
 
 	var/obj/item/bodypart/amputated_limb //Variable where the limb that should be removed is stored
 
+/datum/quirk/amputee/add(client/client_source)
+	RegisterSignal(quirk_holder, COMSIG_CARBON_ATTACH_LIMB, PROC_REF(on_limb_gain))
+
 /datum/quirk/amputee/add_unique(client/client_source)
 	limb_zone = GLOB.limb_choice[client_source?.prefs?.read_preference(/datum/preference/choiced/limb/amputee)]
 	if (isnull(limb_zone))  //Client gone or they chose a random limb
@@ -33,11 +36,14 @@
 		if (BODY_ZONE_R_LEG)
 			amputated_limb = human_holder.get_bodypart(BODY_ZONE_R_LEG)
 
-	human_holder.gain_trauma(new /datum/brain_trauma/severe/paralysis/limb(amputated_limb), TRAUMA_RESILIENCE_ABSOLUTE) //Make sure if they replace their limb, it still won't work.
-
 	amputated_limb.drop_limb() //...then remove it...
 	qdel(amputated_limb) //...then delete it once its removed, so it isn't just on the floor.
 
+/datum/quirk/amputee/proc/on_limb_gain(datum/source, obj/item/bodypart/new_limb, special)
+	var/mob/living/carbon/human/human_holder = quirk_holder
+	SIGNAL_HANDLER
+	if (limb_zone)
+		human_holder.gain_trauma(new /datum/brain_trauma/severe/paralysis/limb(amputated_limb), TRAUMA_RESILIENCE_ABSOLUTE)
 
 
 /datum/quirk/amputee/post_add()
