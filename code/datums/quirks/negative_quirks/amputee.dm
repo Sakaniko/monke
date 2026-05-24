@@ -14,19 +14,18 @@
 	var/obj/item/bodypart/amputated_limb //Variable where the limb that should be removed is stored
 
 /datum/quirk/amputee/add(client/client_source)
-	RegisterSignal(quirk_holder, COMSIG_CARBON_ATTACH_LIMB, PROC_REF(on_limb_gain))
+	//RegisterSignal(quirk_holder, COMSIG_CARBON_ATTACH_LIMB, PROC_REF(on_limb_gain))
 
 /datum/quirk/amputee/add_unique(client/client_source)
 	limb_zone = GLOB.limb_choice[client_source?.prefs?.read_preference(/datum/preference/choiced/limb/amputee)]
 	if (isnull(limb_zone))  //Client gone or they chose a random limb
 		limb_zone = GLOB.limb_choice[pick(GLOB.limb_choice)]
 
-	slot_string = body_zone_as_plaintext(limb_zone) //Copies name of chosen limb to use for the chat warning and med records
-	medical_record_text = "Patient is missing their [slot_string]." //Medical Records text
+	slot_string = body_zone_as_plaintext(limb_zone)
+	medical_record_text = "Patient is missing their [slot_string]."
 	var/mob/living/carbon/human/human_holder = quirk_holder
 
-
-	switch (limb_zone) //Check which limb the character has selected and save it to the variable...
+	switch (limb_zone)
 		if (BODY_ZONE_L_ARM)
 			amputated_limb = human_holder.get_bodypart(BODY_ZONE_L_ARM)
 		if (BODY_ZONE_R_ARM)
@@ -36,14 +35,16 @@
 		if (BODY_ZONE_R_LEG)
 			amputated_limb = human_holder.get_bodypart(BODY_ZONE_R_LEG)
 
-	amputated_limb.drop_limb() //...then remove it...
-	qdel(amputated_limb) //...then delete it once its removed, so it isn't just on the floor.
+	human_holder.gain_trauma(new /datum/brain_trauma/severe/paralysis/limb(limb_zone), TRAUMA_RESILIENCE_ABSOLUTE)
 
-/datum/quirk/amputee/proc/on_limb_gain(datum/source, obj/item/bodypart/new_limb, special)
-	var/mob/living/carbon/human/human_holder = quirk_holder
-	SIGNAL_HANDLER
-	if (limb_zone)
-		human_holder.gain_trauma(new /datum/brain_trauma/severe/paralysis/limb(amputated_limb), TRAUMA_RESILIENCE_ABSOLUTE)
+	amputated_limb.drop_limb()
+	qdel(amputated_limb)
+
+// /datum/quirk/amputee/proc/on_limb_gain(datum/source, obj/item/bodypart/new_limb, special)
+// 	var/mob/living/carbon/human/human_holder = quirk_holder
+// 	SIGNAL_HANDLER
+
+// 		human_holder.gain_trauma(new /datum/brain_trauma/severe/paralysis/limb(amputated_limb), TRAUMA_RESILIENCE_ABSOLUTE)
 
 
 /datum/quirk/amputee/post_add()
@@ -56,3 +57,4 @@
 	var/mob/living/carbon/human/human_holder = quirk_holder
 	human_holder.return_and_replace_bodypart(amputated_limb) //Use return and replace instead of reset because they don't have an arm to reset.
 	human_holder.cure_trauma_type(/datum/brain_trauma/severe/paralysis/limb, TRAUMA_RESILIENCE_ABSOLUTE) //And give them limb control back.
+	to_chat(quirk_holder, span_noteice("You feel your [slot_string] suddenly grow back, able to move once"))
